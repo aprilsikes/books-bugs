@@ -9,14 +9,14 @@ function Books() {
 router.get('/books', function(req, res, next) {
   Books().select().then(function (books) {
     res.render('books/index', {books: books});
-  })
+  });
 });
 
 router.post('/books', function (req, res, next) {
   Books().insert(req.body).then(function (results) {
     res.redirect('/books');
-  })
-})
+  });
+});
 
 router.get('/books/new', function(req, res, next) {
   res.render('books/new');
@@ -29,7 +29,7 @@ router.get('/books/:id', function(req, res, next) {
 });
 
 router.get('/books/:id/edit', function(req, res, next) {
-  Books().where('id', req.params.id).then(function (book) {
+  Books().where('id', req.params.id).first().then(function (book) {
     res.render('books/edit', {book: book});
   });
 });
